@@ -56,6 +56,25 @@ router.post('/celebrities/:id/delete',(req,res,next)=>{
     .catch(error => next(error))
 })
 
+router.get('/celebrities/:id/edit',(req,res,next)=>{
+  const idEdit=req.params.id;
+  Celibrity.findById(idEdit)
+    .then(celebrityEdit => {
+      
+      res.render('celebrities/edit', { celebrities : celebrityEdit});
+    })
+    .catch(error => next(error));
+});
+
+router.post('/celebrities/:id/edit',(req,res,next)=>{
+  const idEdit=req.params.id;
+  const { name, occupation, catchPhrase} = req.body;
+  Celibrity.findByIdAndUpdate(idEdit, { name, occupation, catchPhrase}, { new: true })
+  .then(updatedcelebrity => res.redirect(`/celebrities/${updatedcelebrity.id}`))
+  .catch(error => next(error));
+})
+
+
 
 
 module.exports=router
