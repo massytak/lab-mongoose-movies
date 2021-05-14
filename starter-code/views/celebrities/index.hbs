@@ -5,6 +5,9 @@
     <li>
     <a href="/celebrities/{{id}}">{{name}}</a>
     </li>
+    <form action="/celebrities/{{id}}/delete" method="POST"> {{!-- <-- add the form  --}}
+      <button>Delete</button>
+    </form>
     {{/each}}
     
 </h2>
